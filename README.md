@@ -27,7 +27,7 @@ Run [`reconciliation.sql`](reconciliation.sql) against the supplied `comm_log.db
 Example:
 
 ```sh
-sqlite3 comm_log.db < reconciliation.sql
+sqlite3 data/comm_log.db < reconciliation.sql
 ```
 
 ## Investigation notes / surprise
