@@ -18,7 +18,7 @@ For merchant `501`, October 2026, campaign communications (`communication_type =
 
 I did **not** globally deduplicate customers within every campaign. `9101` is a standalone campaign, and its two sends to `C20` are legitimate separate events under the stated metric. It remains at 7 events (not 6). The SQL therefore deduplicates only campaign families that actually have a retry relationship, and preserves all standalone send events.
 
-I also deliberately did **not** filter on `delivery_status` (`900`/`1100`). A failed attempt (`1100`) inside a retry chain isn't dropped from consideration — it's just superseded once the chain is collapsed to one row per customer, because the later, delivered attempt (or the failed one, if that's all there is) resolves to the same customer either way. `delivery_status` explains *why* a retry chain exists in the first place; it isn't itself a gate on whether a send qualifies for `target_base`.
+I also deliberately did **not** filter on `delivery_status` (`900`/`1100`). A failed attempt (`1100`) inside a retry chain isn't dropped from consideration, it's just superseded once the chain is collapsed to one row per customer, because the later, delivered attempt (or the failed one, if that's all there is) resolves to the same customer either way. `delivery_status` explains *why* a retry chain exists in the first place; it isn't itself a gate on whether a send qualifies for `target_base`.
 
 ## SQL
 
